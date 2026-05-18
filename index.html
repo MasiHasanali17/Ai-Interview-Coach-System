@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="PlaceReady — AI powered placement preparation portal. Mock interviews, aptitude tests, roadmaps and more." />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <title>PlaceReady — Get Placed. Get Hired. Get There.</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* Prevent flash of unstyled content */
+      html {
+        background-color: #0a0a0f;
+        color: #e8e8f0;
+      }
+
+      /* Loading screen shown before React mounts */
+      #loading-screen {
+        position: fixed;
+        inset: 0;
+        background: #0a0a0f;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease;
+      }
+
+      #loading-screen.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .loading-logo {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 32px;
+        font-weight: 700;
+        background: linear-gradient(135deg, #6c63ff, #00d4aa);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 24px;
+        letter-spacing: -1px;
+      }
+
+      .loading-bar-track {
+        width: 200px;
+        height: 3px;
+        background: #1a1a28;
+        border-radius: 2px;
+        overflow: hidden;
+      }
+
+      .loading-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #6c63ff, #00d4aa);
+        border-radius: 2px;
+        animation: loadingAnim 1.2s ease-in-out forwards;
+      }
+
+      @keyframes loadingAnim {
+        0%   { width: 0%; }
+        60%  { width: 75%; }
+        100% { width: 100%; }
+      }
+
+      .loading-text {
+        font-family: 'Inter', sans-serif;
+        font-size: 13px;
+        color: #8888aa;
+        margin-top: 16px;
+        letter-spacing: 0.5px;
+      }
+
+      /* Scrollbar styling */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0a0a0f;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #2a2a3a;
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #6c63ff;
+      }
+
+      /* Selection color */
+      ::selection {
+        background: rgba(108, 99, 255, 0.3);
+        color: #e8e8f0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Loading screen (hides after React mounts) -->
+    <div id="loading-screen">
+      <div class="loading-logo">PlaceReady</div>
+      <div class="loading-bar-track">
+        <div class="loading-bar-fill"></div>
+      </div>
+      <div class="loading-text">Preparing your placement portal...</div>
+    </div>
+
+    <!-- React mounts here -->
+    <div id="root"></div>
+
+    <!-- Hide loading screen once React is ready -->
+    <script>
+      window.addEventListener('load', function () {
+        setTimeout(function () {
+          const screen = document.getElementById('loading-screen');
+          if (screen) {
+            screen.classList.add('hidden');
+            setTimeout(() => screen.remove(), 500);
+          }
+        }, 1400);
+      });
+    </script>
+
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
